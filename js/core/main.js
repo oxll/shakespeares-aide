@@ -4,7 +4,7 @@
  */
 import { createEngine } from "./engine.js";
 import { StageManager } from "../stage/StageManager.js";
-import { John_3_16 } from "../stages/John_3_16.js";
+import { John_3_16 } from "../stages/Stage1.js";
 
 const { engine, render, runner } = createEngine();
 
@@ -126,7 +126,7 @@ window.addEventListener("mouseup", () => {
 window.addEventListener("resize", resize);
 
 function resize() {
-  const verseContainer = document.getElementById("verse-container");
+  const quoteContainer = document.getElementById("quote-container");
 
   render.canvas.width = backdrop.width = window.innerWidth;
   render.canvas.height = backdrop.height = window.innerHeight;
@@ -148,7 +148,7 @@ function resize() {
     dy = window.innerHeight - scaledStageHeight;
     k = window.innerWidth / manager.stageWidth();
 
-    verseContainer.style.width = "100vw";
+    quoteContainer.style.width = "100vw";
   } else {
     const scaledWindowWidth = manager.stageHeight() * windowRatio;
     render.bounds.min.x = manager.stageWidth() / 2 - scaledWindowWidth / 2;
@@ -162,7 +162,7 @@ function resize() {
     k = window.innerHeight / manager.stageHeight();
 
     const percentWindowWidth = (scaledStageWidth / window.innerWidth) * 100;
-    verseContainer.style.width = `${percentWindowWidth}vw`;
+    quoteContainer.style.width = `${percentWindowWidth}vw`;
   }
 
   manager.stage.resizeEnclosure();

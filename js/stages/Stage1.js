@@ -12,14 +12,10 @@ export class John_3_16 extends Stage {
     this.backgroundColor = "#ffa";
   }
 
-  setVerse() {
-    this.verse = `For God c so loved the [world] that
-      he gave his one and only [Son],
-      that whoever believes in him
-      shall not [perish]
-      but have eternal [life].`;
+  setQuote() {
+    this.quote = `“To be, or not to be, t[hat] is the [quest]ion”`;
 
-    this.verseReference = "John 3:16";
+    this.citation = "*[Ham]let* (Act III, Scene I)";
   }
 
   load() {
@@ -30,23 +26,43 @@ export class John_3_16 extends Stage {
       .addProperty("restitution", 0.8)
       .build(175, 300);
 
-    this.globe = new Item(this)
+    this.hat = new Item(this)
       .addPart("circle", "blue", 100, 100, 30)
       .addOverlay("fillRect", "green", 100, 100, 20, 20)
       .addProperty("restitution", 0.8)
       .build();
 
-    this.a = new LetterItem(this, "a").build(100, 200);
+    const particleRadius = 5;
+    const grid = Matter.Composites.stack(150, -100, 10, 10, 2, 2, (x, y) => {
+      return Matter.Bodies.circle(x, y, particleRadius, {
+        friction: 0.00001,
+        collisionFilter: { group: -1 },
+      });
+    });
 
-    this.c = new LetterItem(this, "c").build(300, 200);
+    // 2. Pin the top row in place (make them static)
+    grid.bodies.forEach((body, idx) => {
+      if (idx < 10 || idx > 90 || idx % 10 == 0 || idx % 10 == 9) {
+        body.isStatic = true;
+      }
+    });
 
-    this.x = new LetterItem(this, "x").build(400, 200);
+    // 3. Connect the grid bodies into a mesh with cross braces
+    Matter.Composites.mesh(grid, 10, 10, true, {
+      stiffness: 0.05,
+      render: {
+        type: "line",
+        strokeStyle: "#000000",
+      },
+    });
+
+    this.add(grid);
   }
 
   defineBlanks() {
     this.blanks = [
       {
-        answer: this.globe,
+        answer: this.hat,
         resolve(blank) {
           blank.outerHTML = blank.innerHTML;
         },
@@ -79,7 +95,7 @@ export class John_3_16 extends Stage {
   }
 
   afterRender(ctx) {
-    const span = document.querySelectorAll("#verse .blank")[2];
+    const span = document.querySelectorAll("#quote .blank")[2];
     const rect = this.convertToStage(span.getBoundingClientRect());
 
     ctx.fillStyle = "#f009";

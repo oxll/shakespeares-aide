@@ -14,8 +14,8 @@ export class Stage {
     this.enclosure = new Item(this).addProperty("isStatic", true);
     this.backgroundColor = "#222";
 
-    this.verse = "";
-    this.verseReference = "";
+    this.quote = "";
+    this.citation = "";
 
     this.items = [];
     this.blanks = [];
@@ -66,9 +66,21 @@ export class Stage {
         this.height,
       );
 
-      const w = map(rect.right - rect.left, 0, window.innerWidth, 0, this.width);
+      const w = map(
+        rect.right - rect.left,
+        0,
+        window.innerWidth,
+        0,
+        this.width,
+      );
 
-      const h = map(rect.bottom - rect.top, 0, window.innerWidth, 0, this.width);
+      const h = map(
+        rect.bottom - rect.top,
+        0,
+        window.innerWidth,
+        0,
+        this.width,
+      );
 
       return { x, y, w, h };
     } else {
@@ -110,23 +122,21 @@ export class Stage {
     document.body.style.backgroundColor = this.backgroundColor;
   }
 
-  setVerse() {}
+  setQuote() {}
 
-  parseVerse(verse) {
-    let parsedVerse = verse;
+  formatText(text) {
+    text = text.replace(/\[(.*?)\]/g, '<span class="blank">$1</span>');
+    text = text.replace(/\*(.*?)\*/g, '<i>$1</i>');
 
-    parsedVerse = verse.replace(/\[(.*?)\]/g, '<span class="blank">$1</span>');
-    //parsedVerse = verse.replace(/\*\*(.*?)\*\*/g, '<span class="bold">$1</span>');
-
-    return parsedVerse;
+    return text;
   }
 
-  loadVerse() {
-    const verse = document.getElementById("verse");
-    const reference = document.getElementById("verse-reference");
+  loadquote() {
+    const quote = document.getElementById("quote");
+    const citation = document.getElementById("citation");
 
-    verse.innerHTML = this.parseVerse(this.verse);
-    reference.innerHTML = this.verseReference;
+    quote.innerHTML = this.formatText(this.quote);
+    citation.innerHTML = this.formatText(this.citation);
   }
 
   bodies() {

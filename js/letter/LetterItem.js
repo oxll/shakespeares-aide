@@ -65,10 +65,10 @@ export class LetterItem extends Item {
 
     //ctx.translate(-2, -1);
 
-    const verse = document.getElementById("verse");
-    const verseFontSize = window.getComputedStyle(verse).fontSize;
+    const quote = document.getElementById("quote");
+    const quoteFontSize = window.getComputedStyle(quote).fontSize;
 
-    ctx.font = `${verseFontSize} Libre Baskerville`;
+    ctx.font = `${quoteFontSize} Libre Baskerville`;
 
     ctx.fillStyle = "#f008";
     ctx.fillText(this.letter, 0, 0);
@@ -82,11 +82,11 @@ export class LetterItem extends Item {
   }
 
   resize() {
-    const verse = document.getElementById("verse");
-    const verseFontSize = window.getComputedStyle(verse).fontSize;
+    const quote = document.getElementById("quote");
+    const quoteFontSize = window.getComputedStyle(quote).fontSize;
 
     const ctx = this.stage.render.context;
-    ctx.font = `${verseFontSize} Libre Baskerville`;
+    ctx.font = `${quoteFontSize} Libre Baskerville`;
 
     let size = ctx.measureText(this.letter).width;
     size *= this.stage.fullWidth() / window.innerWidth;

@@ -10,7 +10,6 @@ svg {
   display: none;
 }
 
-
 body {
   overflow: hidden;
 }
@@ -19,7 +18,7 @@ body {
   z-index: 0;
 }
 
-#verse-container {
+#quote-container {
   position: fixed;
   z-index: 1;
   padding: 3vmin;
@@ -39,7 +38,7 @@ body {
   user-select: none;
 }
 
-#verse {
+#quote {
   font-family: "Libre Baskerville", "Times New Roman", serif;
   font-size: 6vmin;
 }
@@ -50,7 +49,7 @@ body {
   text-decoration-skip-ink: none;
 }
 
-#verse-reference {
+#citation {
   font-family: "Inter", Arial, sans-serif;
   font-size: 5vmin;
 }

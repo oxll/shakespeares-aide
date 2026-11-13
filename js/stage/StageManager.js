@@ -23,11 +23,11 @@ export class StageManager {
     this.stage.setBackgroundColor();
     this.stage.applyBackgroundColor();
 
-    this.stage.setVerse();
-    this.stage.loadVerse();
+    this.stage.setQuote();
+    this.stage.loadquote();
 
     this.stage.load();
-    
+
     this.stage.defineBlanks();
 
     this.stage.enter();
